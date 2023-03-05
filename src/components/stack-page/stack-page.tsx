@@ -8,16 +8,18 @@ import styles from './stack-page.module.css';
 export const StackPage: React.FC = () => {
   const [value, setValue] = useState<string>('');
   let [array, setArray] = useState<any[]>([]);
+  const [isShownTimeout, setIsShownTimeout] = useState<boolean>(false);
 
   const addItem = (value: string) => {
+    setIsShownTimeout(true)
     setArray([array?.push(value)]);
     setArray([...array]);
     setValue('')
+    setIsShownTimeout(false)
   }
   const delItem = () => {
     setArray([array?.pop()]);
     setArray([...array]);
-
   }
   const clear= () => {
     setArray([array.splice(0, array.length)]);
@@ -26,7 +28,7 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={styles.input} onClick={(e) => e.preventDefault()}>
+      <div className={styles.input}>
         <Input
           isLimitText={true}
           maxLength={4}
@@ -38,6 +40,7 @@ export const StackPage: React.FC = () => {
           text='Добавить'
           onClick={() => addItem(value)}
           disabled={value ? false : true}
+          isLoader={isShownTimeout}
         />
         <Button
           text='Удалить'
@@ -50,11 +53,11 @@ export const StackPage: React.FC = () => {
           extraClass={`${styles.btnNewArr} ${styles.btn}`}
           disabled={array.length ? false : true}
         />
-      </form>
+      </div>
       <ul className={styles.circle}>
           {array?.map((item, index: number) => {
             return (
-              <li>< Circle
+              <li key={index}>< Circle
                 head={array.length - 1 === index ? "top" : ''}
                 letter={item}
                 key={index}

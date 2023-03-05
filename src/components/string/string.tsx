@@ -50,12 +50,12 @@ export const StringComponent: React.FC = () => {
     <SolutionLayout title="Строка">
       <div className={styles.input}>
         <Input value={value} isLimitText={true} maxLength={11} onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} type="text" />
-        <Button text={'Развернуть'} onClick={() => string(value)} isLoader={isShownTimeout}/>
+        <Button disabled={value === '' ? true : false} text={'Развернуть'} onClick={() => string(value)} isLoader={isShownTimeout}/>
       </div>
       <ul className={styles.circle}>
         {array?.map(({string, color}, index) => {
           return (
-            <li>< Circle state={color} letter={string} key={index}/></li>
+            <li key={index}>< Circle state={color} letter={string} key={index}/></li>
           )
         })}
       </ul>

@@ -6,7 +6,7 @@ import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import styles from './sorting-page.module.css';
 
 export type TNumber = Array<{
-  number: number;
+  number: number
   color: string
 }>
 
@@ -171,7 +171,7 @@ export const SortingPage: React.FC = () => {
       <ul className={styles.column}>
           {array?.map(({number, color}, index) => {
             return (
-              <li style={{margin: '10px'}}><Column state={color}  index={number} key={index} /></li>
+              <li key={index} style={{margin: '10px'}}><Column state={color}  index={number} key={index} /></li>
             )
           })}
         </ul>

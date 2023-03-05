@@ -88,7 +88,7 @@ export const QueuePage: React.FC = () => {
 
           {stack?.map((item, index: number) => {
             return (
-              <li>< Circle
+              <li key={index}>< Circle
                 tail={tail <= head! ? '' : tail - 1 === index ? 'tail' : ''}
                 head={head === null ? '' : head === index ? 'head' : ''}
                 letter={item === null ? '' : item}
