@@ -3,6 +3,7 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
+import { Stack } from "./stack";
 import styles from './stack-page.module.css';
 
 export const StackPage: React.FC = () => {
@@ -10,15 +11,19 @@ export const StackPage: React.FC = () => {
   let [array, setArray] = useState<any[]>([]);
   const [isShownTimeout, setIsShownTimeout] = useState<boolean>(false);
 
+  const st = new Stack<string>(array);
+
+
+
   const addItem = (value: string) => {
     setIsShownTimeout(true)
-    setArray([array?.push(value)]);
+    setArray([st?.push(value)]);
     setArray([...array]);
     setValue('')
     setIsShownTimeout(false)
   }
   const delItem = () => {
-    setArray([array?.pop()]);
+    setArray([st?.pop()]);
     setArray([...array]);
   }
   const clear= () => {
