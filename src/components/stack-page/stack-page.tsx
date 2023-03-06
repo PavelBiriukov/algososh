@@ -13,23 +13,28 @@ export const StackPage: React.FC = () => {
 
   const st = new Stack<string>(array);
 
+  const delay = (delay: number) => new Promise((resolve) => setInterval(resolve, delay));
 
 
-  const addItem = (value: string) => {
+  const addItem = async(value: string) => {
+    
     setIsShownTimeout('0')
+    await delay(500)
     setArray([st?.push(value)]);
     setArray([...array]);
     setValue('')
     setIsShownTimeout('')
   }
-  const delItem = () => {
+  const delItem = async () => {
     setIsShownTimeout('1')
+    await delay(500)
     setArray([st?.pop()]);
     setArray([...array]);
     setIsShownTimeout('')
   }
-  const clear= () => {
+  const clear = async() => {
     setIsShownTimeout('2')
+    await delay(500)
     setArray([array.splice(0, array.length)]);
     setArray([...array]);
     setIsShownTimeout('')
@@ -63,7 +68,6 @@ export const StackPage: React.FC = () => {
           onClick={clear}
           extraClass={`${styles.btnNewArr} ${styles.btn}`}
           disabled={array.length ? false : true}
-
         />
       </div>
       <ul className={styles.circle}>

@@ -12,7 +12,7 @@ export type TNumber = Array<{
 
 export const SortingPage: React.FC = () => {
   let [array, setArray] = useState<TNumber>([]);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>('1');
   const [loader, setLoader] = useState<string>('');
   const [isShownTimeout, setIsShownTimeout] = useState<boolean>(false);
 
