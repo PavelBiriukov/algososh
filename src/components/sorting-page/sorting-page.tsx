@@ -17,9 +17,11 @@ export const SortingPage: React.FC = () => {
   const [isShownTimeout, setIsShownTimeout] = useState<boolean>(false);
 
   const newArr = () => {
+    setLoader('2')
     setArray(array = []);
     randomInteger()
     randomArr()
+    setLoader('')
   }
 
   function randomInteger() {
@@ -166,7 +168,7 @@ export const SortingPage: React.FC = () => {
         <RadioInput label={'Пузырек'} extraClass={styles.radio} checked={value === '2' ? true : false} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue((e.target.value))} value={'2'} />
         <Button isLoader={loader === '0'? true: false} extraClass={`${styles.btnLeft} ${styles.btn}`} disabled={isShownTimeout} text='По возрастанию' onClick={() => increase()} sorting={Direction.Ascending} />
         <Button isLoader={loader === '1'? true: false} extraClass={`${styles.btn}`} disabled={isShownTimeout} text='По убыванию' onClick={() => decrease()} sorting={Direction.Descending}/>
-        <Button disabled={isShownTimeout} extraClass={`${styles.btnNewArr} ${styles.btn}`} text='Новый массив' onClick={() => newArr()}/>
+        <Button isLoader={loader === '2'? true: false} disabled={isShownTimeout} extraClass={`${styles.btnNewArr} ${styles.btn}`} text='Новый массив' onClick={() => newArr()}/>
       </div>
       <ul className={styles.column}>
           {array?.map(({number, color}, index) => {

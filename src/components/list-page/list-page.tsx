@@ -6,7 +6,7 @@ import { ArrowIcon } from "../ui/icons/arrow-icon";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import styles from './list-page.module.css';
 import { delay } from "../../constants/utils";
-import { LinkedList, Node } from "./Node";
+import { LinkedList } from "./Node";
 
 
 const firstArr = ['0', '34', '8', '1'];
@@ -35,7 +35,7 @@ export const ListPage: React.FC = () => {
   }
 
   const addTail = async () => {
-    
+
     setLoader(2);
     setTailIndex(list.getTailIndex());
     setHeadSmallCircle(tailIndex);
@@ -71,13 +71,13 @@ export const ListPage: React.FC = () => {
   const addToIndex = async () => {
     setLoader(5);
     list.addToIndex(inputValue, +inputIndex);
-    
+
     for (let i = 0; i <= inputIndex; i++) {
       await delay(time);
       setColorChanging(i)
       setHeadSmallCircle(i);
     }
-    
+
     await delay(time);
     setInputValue('');
     setInputIndex('');
@@ -114,7 +114,7 @@ export const ListPage: React.FC = () => {
   }
 
   const popTail = async () => {
-    
+
     setLoader(4);
     setTailIndex(list.getTailIndex());
     setTailSmallCircle(tailIndex);
@@ -128,7 +128,7 @@ export const ListPage: React.FC = () => {
     setLoader(NaN);
   }
   const popHead = async () => {
-    
+
     setLoader(3);
     setHeadIndex(list.getHeadIndex());
     setTailSmallCircle(headIndex);
@@ -184,7 +184,7 @@ export const ListPage: React.FC = () => {
           text={'Удалить из head'}
           isLoader={loader === 3}
           onClick={popHead}
-          disabled={validationLoader(3)}
+          disabled={validationLoader(3) }
         />
         <Button
           extraClass={styles.btn}
@@ -194,7 +194,7 @@ export const ListPage: React.FC = () => {
           disabled={validationLoader(4)}
         />
       </form>
-      <form onChange={e => e.preventDefault()} className={`${styles.form} ${styles.formIndex}`}>
+      <form onSubmit={e => e.preventDefault()} className={`${styles.form} ${styles.formIndex}`}>
         <Input
           max={list.getSize()}
           type='number'
@@ -250,5 +250,5 @@ export const ListPage: React.FC = () => {
       }
 
     </SolutionLayout>
-  );
-};
+  )
+}  

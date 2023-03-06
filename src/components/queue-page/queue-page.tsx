@@ -19,6 +19,7 @@ export const QueuePage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [tail, setTail] = useState<number>(queue.getTail());
   const [head, setHead] = useState<number | null>(null);
+  const [isShownTimeout, setIsShownTimeout] = useState<string>('');
 
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ export const QueuePage: React.FC = () => {
   }
 
   const addItem = async () => {
+    setIsShownTimeout('0')
     setCurrentIndex(tail);
     setInputValue('');
     await delay(time);
@@ -36,21 +38,26 @@ export const QueuePage: React.FC = () => {
     setCurrentIndex(tail);
     await delay(time)
     setCurrentIndex(null);
+    setIsShownTimeout('')
   }
   const delItem = async () => {
+    setIsShownTimeout('1')
     setCurrentIndex(head);
     await delay(time);
     queue.dequeue();
     setStack([...queue.printQueue()]);
     setHead(queue.getHead())
     setCurrentIndex(null);
+    setIsShownTimeout('')
   }
   const clear = async () => {
+    setIsShownTimeout('2')
     queue.reset();
     setStack([...queue.printQueue()]);
     setHead(null);
     setTail(queue.getTail());
     await delay(time)
+    setIsShownTimeout('')
   }
 
 
@@ -66,17 +73,19 @@ export const QueuePage: React.FC = () => {
           extraClass={`${styles.inputStack}`}
         />
         <Button
+          isLoader={isShownTimeout === '0'}
           text='Добавить'
           onClick={() => addItem()}
           disabled={inputValue ? false : true}
         />
-        {console.log(stack.length, head)}
         <Button
+          isLoader={isShownTimeout === '1'}
           text='Удалить'
           onClick={delItem}
           disabled={head === null ? true : head < tail ? false : true}
         />
         <Button
+          isLoader={isShownTimeout === '2'}
           text='Очистить'
           onClick={clear}
           extraClass={`${styles.btnNewArr} ${styles.btn}`}

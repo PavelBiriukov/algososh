@@ -9,26 +9,30 @@ import styles from './stack-page.module.css';
 export const StackPage: React.FC = () => {
   const [value, setValue] = useState<string>('');
   let [array, setArray] = useState<any[]>([]);
-  const [isShownTimeout, setIsShownTimeout] = useState<boolean>(false);
+  const [isShownTimeout, setIsShownTimeout] = useState<string>('');
 
   const st = new Stack<string>(array);
 
 
 
   const addItem = (value: string) => {
-    setIsShownTimeout(true)
+    setIsShownTimeout('0')
     setArray([st?.push(value)]);
     setArray([...array]);
     setValue('')
-    setIsShownTimeout(false)
+    setIsShownTimeout('')
   }
   const delItem = () => {
+    setIsShownTimeout('1')
     setArray([st?.pop()]);
     setArray([...array]);
+    setIsShownTimeout('')
   }
   const clear= () => {
+    setIsShownTimeout('2')
     setArray([array.splice(0, array.length)]);
     setArray([...array]);
+    setIsShownTimeout('')
   }
 
   return (
@@ -45,18 +49,21 @@ export const StackPage: React.FC = () => {
           text='Добавить'
           onClick={() => addItem(value)}
           disabled={value ? false : true}
-          isLoader={isShownTimeout}
+          isLoader={isShownTimeout === '0'}
         />
         <Button
+          isLoader={isShownTimeout === '1'}
           text='Удалить'
           onClick={delItem}
           disabled={array.length ? false : true}
         />
         <Button
+          isLoader={isShownTimeout === '2'}
           text='Очистить'
           onClick={clear}
           extraClass={`${styles.btnNewArr} ${styles.btn}`}
           disabled={array.length ? false : true}
+
         />
       </div>
       <ul className={styles.circle}>
