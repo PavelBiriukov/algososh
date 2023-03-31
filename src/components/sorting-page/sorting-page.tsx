@@ -165,7 +165,7 @@ export const SortingPage: React.FC = () => {
     <SolutionLayout title="Сортировка массива">
       <div className={styles.input}>
         <RadioInput label={'Выбор'} checked={value === '1' ? true : false} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue((e.target.value))} value={'1'} />
-        <RadioInput label={'Пузырек'} extraClass={styles.radio} checked={value === '2' ? true : false} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue((e.target.value))} value={'2'} />
+        <RadioInput label={'Пузырёк'} extraClass={styles.radio} checked={value === '2' ? true : false} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue((e.target.value))} value={'2'} />
         <Button isLoader={loader === '0'? true: false} extraClass={`${styles.btnLeft} ${styles.btn}`} disabled={isShownTimeout} text='По возрастанию' onClick={() => increase()} sorting={Direction.Ascending} />
         <Button isLoader={loader === '1'? true: false} extraClass={`${styles.btn}`} disabled={isShownTimeout} text='По убыванию' onClick={() => decrease()} sorting={Direction.Descending}/>
         <Button isLoader={loader === '2'? true: false} disabled={isShownTimeout} extraClass={`${styles.btnNewArr} ${styles.btn}`} text='Новый массив' onClick={() => newArr()}/>
@@ -173,7 +173,7 @@ export const SortingPage: React.FC = () => {
       <ul className={styles.column}>
           {array?.map(({number, color}, index) => {
             return (
-              <li key={index} style={{margin: '10px'}}><Column state={color}  index={number} key={index} /></li>
+              <li key={index} style={{margin: '10px'}}><Column  state={color}  index={number} key={index} /></li>
             )
           })}
         </ul>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
@@ -49,13 +49,13 @@ export const StringComponent: React.FC = () => {
   return (
     <SolutionLayout title="Строка">
       <div className={styles.input}>
-        <Input value={value} isLimitText={true} maxLength={11} onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} type="text" />
+        <Input placeholder="Введите текст" value={value} isLimitText={true} maxLength={11} onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} type="text" />
         <Button disabled={value === '' ? true : false} text={'Развернуть'} onClick={() => string(value)} isLoader={isShownTimeout}/>
       </div>
       <ul className={styles.circle}>
         {array?.map(({string, color}, index) => {
           return (
-            <li key={index}>< Circle state={color} letter={string} key={index}/></li>
+            <li key={index}><Circle data-testid="text-in-circle" state={color} letter={string} key={index}/></li>
           )
         })}
       </ul>
